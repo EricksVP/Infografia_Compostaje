@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía de Compostaje - Hotel Nido de Pájaro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #D4C5BE;
+            color: #4A4441;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            max-height: 400px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .card {
+            background-color: #FFFFFF;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+        .icon-text {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.125rem;
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-[#4A4441] text-white text-center p-8 shadow-lg">
+        <h1 class="text-4xl md:text-5xl font-black tracking-tight">🌿 Guía de Compostaje del Hotel Nido de Pájaro 🌿</h1>
+        <p class="mt-4 text-xl md:text-2xl text-[#D4C5BE]">Transformando Residuos en Riqueza para Nuestros Jardines</p>
+    </header>
+
+    <main class="container mx-auto p-4 md:p-8">
+
+        <section id="intro" class="text-center mb-12">
+            <div class="card max-w-4xl mx-auto">
+                <h2 class="text-3xl font-bold text-[#786F6B] mb-4">El Desafío y la Oportunidad</h2>
+                <p class="text-lg mb-6">Una gran parte de los residuos de nuestra cocina son orgánicos y pueden tener una segunda vida. Al compostar, no solo reducimos drásticamente lo que enviamos al vertedero, sino que también creamos un abono de alta calidad para embellecer nuestro hotel. Observemos la composición de nuestros residuos y el potencial que tenemos.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="w-full">
+                        <h3 class="text-xl font-bold mb-2">Residuos Típicos de Cocina</h3>
+                        <div class="chart-container h-64 md:h-80">
+                            <canvas id="wasteCompositionChart"></canvas>
+                        </div>
+                        <p class="mt-2 text-sm">Visualización de la proporción de residuos orgánicos compostables frente a otros tipos de basura generados en la cocina.</p>
+                    </div>
+                    <div class="w-full">
+                        <h3 class="text-xl font-bold mb-2">Nuestro Potencial de Compostaje</h3>
+                        <div class="chart-container h-64 md:h-80">
+                            <canvas id="compostPotentialChart"></canvas>
+                        </div>
+                        <p class="mt-2 text-sm">Este gráfico muestra cómo, al separar correctamente, podemos convertir un gran volumen de residuos en un recurso valioso.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="separation" class="mb-12">
+            <div class="card max-w-5xl mx-auto">
+                <h2 class="text-3xl font-bold text-center text-[#786F6B] mb-6">Paso 1: La Separación es la Clave</h2>
+                <p class="text-lg text-center mb-8">El éxito del compostaje comienza en la cocina. Es fundamental separar correctamente los materiales. Utilizaremos contenedores específicos para asegurar que solo lo adecuado llegue a nuestra pila de compost.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-green-100 p-6 rounded-lg border-2 border-green-500">
+                        <h3 class="text-2xl font-bold text-green-800 mb-4 text-center">✅ ¡SÍ, al Compost!</h3>
+                        <div>
+                            <p class="font-bold text-green-700">Materiales Verdes (Nitrógeno):</p>
+                            <p class="icon-text">🍓 Restos de frutas y verduras</p>
+                            <p class="icon-text">☕ Posos de café y filtros</p>
+                            <p class="icon-text">🥚 Cáscaras de huevo trituradas</p>
+                            <p class="icon-text">🌱 Restos de poda verde</p>
+                        </div>
+                        <hr class="my-4 border-green-300">
+                        <div>
+                            <p class="font-bold text-yellow-800">Materiales Cafés (Carbono):</p>
+                            <p class="icon-text">🍂 Hojas secas y ramas</p>
+                            <p class="icon-text">📦 Cartón y papel sin tinta</p>
+                            <p class="icon-text">🧻 Servilletas de papel</p>
+                            <p class="icon-text">🪵 Aserrín de madera no tratada</p>
+                        </div>
+                    </div>
+                    <div class="bg-red-100 p-6 rounded-lg border-2 border-red-500">
+                        <h3 class="text-2xl font-bold text-red-800 mb-4 text-center">❌ ¡NO, al Compost!</h3>
+                        <p class="icon-text">🥩 Carnes, huesos y pescado</p>
+                        <p class="icon-text">🧀 Lácteos, grasas y aceites</p>
+                        <p class="icon-text">🌶️ Comidas cocinadas o con salsas</p>
+                        <p class="icon-text">🍋 Exceso de cítricos</p>
+                        <p class="icon-text">🥀 Plantas enfermas o con pesticidas</p>
+                        <p class="mt-4 text-red-700 font-semibold">Estos materiales atraen plagas, generan malos olores y pueden contaminar nuestro compost final.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="process" class="mb-12">
+            <div class="card max-w-4xl mx-auto">
+                <h2 class="text-3xl font-bold text-center text-[#786F6B] mb-8">El Proceso: De Residuo a Recurso</h2>
+                <p class="text-lg text-center mb-10">Seguir estos pasos asegurará un compost de alta calidad. El proceso es un ciclo que requiere atención y paciencia, pero los resultados valen la pena.</p>
+                
+                <div class="space-y-8">
+                    <div class="card bg-[#A69A94] text-white">
+                        <h3 class="text-2xl font-bold mb-2">Paso 2: Construye tu Pila "Lasaña"</h3>
+                        <p class="mb-4">El secreto es alternar capas de materiales "verdes" y "cafés" para un equilibrio perfecto de nitrógeno y carbono, lo que optimiza la descomposición.</p>
+                        <div class="chart-container h-64 md:h-80">
+                            <canvas id="lasagnaChart"></canvas>
+                        </div>
+                        <p class="mt-2 text-sm">Este gráfico de barras apiladas simula las capas de nuestra pila de compost, mostrando la proporción ideal entre materiales.</p>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="text-2xl font-bold mb-2 text-[#786F6B]">Paso 3: Mantenimiento y Paciencia</h3>
+                        <p class="mb-6">Una vez construida la pila, el cuidado regular es clave para que los microorganismos hagan su trabajo eficientemente.</p>
+                        <div class="flex flex-col md:flex-row justify-around text-center items-center">
+                            <div class="mb-4 md:mb-0">
+                                <p class="text-5xl">💨</p>
+                                <p class="text-xl font-bold">Aireación</p>
+                                <p class="text-lg">Voltear 1 vez/semana</p>
+                            </div>
+                            <div class="mb-4 md:mb-0">
+                                <p class="text-5xl">💧</p>
+                                <p class="text-xl font-bold">Humedad</p>
+                                <p class="text-lg">Como esponja húmeda</p>
+                            </div>
+                            <div>
+                                <p class="text-5xl">🔥</p>
+                                <p class="text-xl font-bold">Temperatura</p>
+                                <p class="text-lg">Calor = ¡Actividad!</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="text-2xl font-bold mb-2 text-[#786F6B]">Paso 4: La Cosecha - ¡Nuestro Oro Negro!</h3>
+                        <p class="mb-4">En un periodo de 3 a 6 meses, nuestros residuos se transformarán. El compost estará listo cuando tenga un color oscuro, textura suelta y olor a tierra de bosque.</p>
+                        <div class="chart-container h-64 md:h-80">
+                            <canvas id="timelineChart"></canvas>
+                        </div>
+                        <p class="mt-2 text-sm text-center">Este gráfico de área muestra el progreso de la descomposición a lo largo del tiempo, desde los residuos iniciales hasta el compost maduro.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="impact" class="text-center">
+             <div class="card max-w-4xl mx-auto">
+                <h2 class="text-3xl font-bold text-[#786F6B] mb-4">Paso 5: El Círculo se Cierra - Nuestro Impacto</h2>
+                <p class="text-lg mb-6">El compost cosechado es un tesoro para nuestro hotel. Al utilizarlo, no solo embellecemos nuestros espacios, sino que también demostramos un compromiso real con la sostenibilidad, reduciendo significativamente nuestra huella de residuos.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                         <h3 class="text-xl font-bold mb-2">Usos del Compost</h3>
+                         <div class="text-left space-y-3">
+                            <p class="icon-text">🌸 Nutrir los jardines y flores.</p>
+                            <p class="icon-text">🪴 Mejorar el suelo de las macetas.</p>
+                            <p class="icon-text">🌿 Crear un huerto de hierbas orgánicas.</p>
+                         </div>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold mb-2">Reducción de Residuos</h3>
+                        <div class="chart-container h-64 md:h-80">
+                            <canvas id="impactChart"></canvas>
+                        </div>
+                        <p class="mt-2 text-sm">Comparación del volumen de residuos enviados al vertedero antes y después de implementar nuestro programa de compostaje.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="text-center p-6 mt-8 bg-[#4A4441] text-[#D4C5BE]">
+        <p class="font-bold">Hotel Nido de Pájaro - Comprometidos con un Futuro Sostenible</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const FONT_COLOR = '#4A4441';
+            const BORDER_COLOR = '#A69A94';
+            const PALETTE = {
+                green: '#556B2F',
+                brown: '#8B4513',
+                other: '#A69A94',
+                landfill: '#786F6B'
+            };
+
+            function wrapLabel(str, maxWidth) {
+                if (typeof str !== 'string' || str.length <= maxWidth) {
+                    return str;
+                }
+                const words = str.split(' ');
+                let lines = [];
+                let currentLine = words[0];
+                for (let i = 1; i < words.length; i++) {
+                    if (currentLine.length + words[i].length + 1 < maxWidth) {
+                        currentLine += ' ' + words[i];
+                    } else {
+                        lines.push(currentLine);
+                        currentLine = words[i];
+                    }
+                }
+                lines.push(currentLine);
+                return lines;
+            }
+
+            const tooltipTitleCallback = (tooltipItems) => {
+                const item = tooltipItems[0];
+                let label = item.chart.data.labels[item.dataIndex];
+                if (Array.isArray(label)) {
+                    return label.join(' ');
+                }
+                return label;
+            };
+
+            const SHARED_CHART_OPTIONS = {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: FONT_COLOR,
+                            font: {
+                                size: 14
+                            }
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            title: tooltipTitleCallback
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        ticks: { color: FONT_COLOR },
+                        grid: { color: BORDER_COLOR }
+                    },
+                    x: {
+                        ticks: { color: FONT_COLOR },
+                        grid: { color: BORDER_COLOR }
+                    }
+                }
+            };
+
+            const wasteCompositionCtx = document.getElementById('wasteCompositionChart').getContext('2d');
+            new Chart(wasteCompositionCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Orgánico Compostable', 'Otros Residuos'],
+                    datasets: [{
+                        data: [55, 45],
+                        backgroundColor: [PALETTE.green, PALETTE.landfill],
+                        borderColor: '#FFFFFF',
+                        borderWidth: 2
+                    }]
+                },
+                options: { ...SHARED_CHART_OPTIONS, scales: {} }
+            });
+
+            const compostPotentialCtx = document.getElementById('compostPotentialChart').getContext('2d');
+            new Chart(compostPotentialCtx, {
+                type: 'pie',
+                data: {
+                    labels: ['Convertido en Compost', 'Residuo Inevitable'],
+                    datasets: [{
+                        data: [85, 15],
+                        backgroundColor: [PALETTE.brown, PALETTE.landfill],
+                        borderColor: '#FFFFFF',
+                        borderWidth: 2
+                    }]
+                },
+                options: { ...SHARED_CHART_OPTIONS, scales: {} }
+            });
+
+            const lasagnaCtx = document.getElementById('lasagnaChart').getContext('2d');
+            new Chart(lasagnaCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Pila de Compost'],
+                    datasets: [
+                        { label: 'Capa Base (Ramas)', data: [10], backgroundColor: PALETTE.brown },
+                        { label: 'Capa Verde (Cocina)', data: [15], backgroundColor: PALETTE.green },
+                        { label: 'Capa Café (Hojas)', data: [20], backgroundColor: PALETTE.brown },
+                        { label: 'Capa Verde (Cocina)', data: [15], backgroundColor: PALETTE.green },
+                        { label: 'Capa Café (Hojas)', data: [20], backgroundColor: PALETTE.brown }
+                    ]
+                },
+                options: {
+                    ...SHARED_CHART_OPTIONS,
+                    scales: {
+                        x: { stacked: true, ticks: { display: false }, grid: { display: false } },
+                        y: { stacked: true, title: { display: true, text: 'Grosor de Capa (cm)', color: FONT_COLOR } }
+                    }
+                }
+            });
+
+            const timelineCtx = document.getElementById('timelineChart').getContext('2d');
+            new Chart(timelineCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Mes 0', 'Mes 1', 'Mes 2', 'Mes 3', 'Mes 4', 'Mes 5', 'Mes 6'],
+                    datasets: [{
+                        label: 'Nivel de Descomposición',
+                        data: [0, 15, 35, 60, 85, 95, 100],
+                        fill: true,
+                        backgroundColor: 'rgba(85, 107, 47, 0.5)',
+                        borderColor: PALETTE.green,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    ...SHARED_CHART_OPTIONS,
+                    scales: {
+                        y: { 
+                            max: 100, 
+                            title: { display: true, text: '% Descompuesto', color: FONT_COLOR },
+                            ticks: { callback: value => value + '%' } 
+                        },
+                        x: { title: { display: true, text: 'Tiempo', color: FONT_COLOR } }
+                    }
+                }
+            });
+
+            const impactCtx = document.getElementById('impactChart').getContext('2d');
+            new Chart(impactCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Antes', 'Después'],
+                    datasets: [{
+                        label: 'Residuos a Vertedero (Kg/semana)',
+                        data: [200, 90],
+                        backgroundColor: [PALETTE.landfill, PALETTE.green],
+                        borderColor: BORDER_COLOR,
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    ...SHARED_CHART_OPTIONS,
+                    indexAxis: 'y',
+                    scales: {
+                        x: { title: { display: true, text: 'Kg por Semana', color: FONT_COLOR } }
+                    }
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
